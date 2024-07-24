@@ -104,7 +104,7 @@ if selected_user != "":
 st.markdown("---")
 st.header("Películas más vistas por la comunidad!")
 
-cols = st.columns(6)
+cols = st.columns(5)
 for idx, movie in enumerate(popular_movies):
     with cols[idx % 5]:
         st.text(movie["title"])
