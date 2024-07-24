@@ -88,16 +88,20 @@ if selected_user != "":
     ## get the recomendation
     recommended_movies = recommend_movies_by_user(selected_user, knn_model, tfidf_movies_df)
 
+    
+    l_movies = recommended_movies['title'].values
+    l_distances = recommended_movies['distance'].values
+
     cols = st.columns(5)
-    list_movies = recommended_movies['title'].unique()      
-    for idx, movie in enumerate(list_movies):
+    for idx, (movie, distance) in enumerate(zip(l_movies, l_distances)):
         with cols[idx % 5]:
-            st.text(movie)
+            st.text(movie + ' (' + str(round(distance, 2)) + ')')
+            st.text('')
 
 ##################################################################
 ## Popularity Movies
 ##################################################################
-
+st.markdown("---")
 st.header("Películas más vistas por la comunidad!")
 
 cols = st.columns(6)
@@ -113,5 +117,3 @@ for idx, movie in enumerate(popular_movies):
             st.image(img)
         else:
             st.write("Image not found")
-
-print('Here!!!')
